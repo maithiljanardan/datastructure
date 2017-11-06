@@ -49,6 +49,31 @@ public class ArrayMain {
 	}
 
 	/**
+	 * 
+	 * @param arr
+	 * @param shiftBy
+	 */
+	public static void leftRotateArrayByReversal(int[] arr, int shiftBy) {
+
+		reverserArray(arr, 0, shiftBy - 1);
+		reverserArray(arr, shiftBy, arr.length - 1);
+		reverserArray(arr, 0, arr.length - 1);
+
+	}
+
+	private static void reverserArray(int[] arr, int start, int end) {
+		int temp;
+		while (start < end) {
+			temp = arr[start];
+			arr[start] = arr[end];
+			arr[end] = temp;
+			start++;
+			end--;
+		}
+
+	}
+
+	/**
 	 * This method calculates the gcd for two given input numbers
 	 * 
 	 * @param x
@@ -56,7 +81,7 @@ public class ArrayMain {
 	 * @return
 	 * @author janardhan 2017
 	 */
-	public static int gCd(int x, int y) {
+	private static int gCd(int x, int y) {
 		if (y == 0) {
 			return x;
 		}
