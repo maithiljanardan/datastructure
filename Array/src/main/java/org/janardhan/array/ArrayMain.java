@@ -88,4 +88,38 @@ public class ArrayMain {
 		return gCd(y, x % y);
 	}
 
+	/**
+	 * 
+	 * @param arr
+	 * @param l
+	 * @param r
+	 * @param key
+	 * @return
+	 * @author janardhan 2017
+	 */
+	public static int binarySearchInSortedRotatedArray(int arr[], int l, int r, int key) {
+
+		if (l > r)
+			return -1;
+
+		int mid = (l + r) / 2;
+		if (arr[mid] == key)
+			return mid;
+
+		// If arr[l...mid] is sorted
+		if (arr[l] <= arr[mid]) {
+
+			if (key >= arr[l] && key <= arr[mid])
+				return binarySearchInSortedRotatedArray(arr, l, mid - 1, key);
+
+			return binarySearchInSortedRotatedArray(arr, mid + 1, r, key);
+		}
+
+		// If arr[l..mid] is not sorted, then arr[mid... r] must be sorted
+		if (key >= arr[mid] && key <= arr[r])
+			return binarySearchInSortedRotatedArray(arr, mid + 1, r, key);
+
+		return binarySearchInSortedRotatedArray(arr, l, mid - 1, key);
+	}
+
 }
