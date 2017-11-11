@@ -2,7 +2,7 @@ package org.janardhan.array;
 
 /**
  * 
- *
+ * @author janardhan 2017
  */
 public class ArrayMain {
 
@@ -16,7 +16,9 @@ public class ArrayMain {
 	 * d).
 	 * 
 	 * @param arr
+	 *            The array to be rotated
 	 * @param shiftBy
+	 *            The position by which the array is to be shifted
 	 * @author janardhan 2017
 	 */
 	public static void leftRotateArray(int[] arr, int shiftBy) {
@@ -48,9 +50,23 @@ public class ArrayMain {
 		}
 	}
 
-	/**
+	/*
+	 * For arr[] = [1, 2, 3, 4, 5, 6, 7], d =2 and n = 7
+	 */
+	/*
+	 * A = [1, 2] and B = [3, 4, 5, 6, 7]
+	 */
+	/*
+	 * Reverse A, we get ArB = [2, 1, 3, 4, 5, 6, 7]
+	 */
+	/*
+	 * Reverse B, we get ArBr = [2, 1, 7, 6, 5, 4, 3]
+	 */
+	/*
+	 * Reverse all, we get (ArBr)r = [3, 4, 5, 6, 7, 1, 2]
 	 * 
 	 * @param arr
+	 * 
 	 * @param shiftBy
 	 */
 	public static void leftRotateArrayByReversal(int[] arr, int shiftBy) {
@@ -61,6 +77,13 @@ public class ArrayMain {
 
 	}
 
+	/**
+	 * This method reverses an array
+	 * 
+	 * @param arr
+	 * @param start
+	 * @param end
+	 */
 	private static void reverserArray(int[] arr, int start, int end) {
 		int temp;
 		while (start < end) {
@@ -89,6 +112,7 @@ public class ArrayMain {
 	}
 
 	/**
+	 * This method search an element in a sorted and rotated array.
 	 * 
 	 * @param arr
 	 * @param l
@@ -122,4 +146,45 @@ public class ArrayMain {
 		return binarySearchInSortedRotatedArray(arr, l, mid - 1, key);
 	}
 
+	/**
+	 * This method checks if there exists a pair of element in the array whose sum
+	 * equals the key.
+	 * 
+	 * @param arr
+	 * @param key
+	 * @return
+	 */
+	private static boolean ifPairExistsInSortedRotatedArray(int arr[], int key) {
+
+		int arrSize = arr.length;
+
+		int i;
+		// Find the pivot element index
+		for (i = 0; i < arrSize - 1; i++) {
+			if (arr[i] > arr[i + 1])
+				break;
+		}
+
+		// This position contains the lowest value element
+		int l = (i + 1) % arrSize;
+
+		// This position contains the highest value element
+		int r = i;
+
+		// Loop while the both pointers reach the same index
+		while (l != r) {
+			// If found, return true
+			if (arr[l] + arr[r] == key)
+				return true;
+
+			// If sum is smaller than key then move the left pointer right
+			if (arr[l] + arr[r] < key)
+				l = (l + 1) % arrSize;
+
+			// Else move the right pointer left
+			else
+				r = (arrSize + r - 1) % arrSize;
+		}
+		return false;
+	}
 }
