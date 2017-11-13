@@ -154,7 +154,7 @@ public class ArrayMain {
 	 * @param key
 	 * @return
 	 */
-	private static boolean ifPairExistsInSortedRotatedArray(int arr[], int key) {
+	public boolean ifPairExistsInSortedRotatedArray(int arr[], int key) {
 
 		int arrSize = arr.length;
 
@@ -186,5 +186,42 @@ public class ArrayMain {
 				r = (arrSize + r - 1) % arrSize;
 		}
 		return false;
+	}
+
+	/**
+	 * This method calcalute the max sum of i*arr[i] after every possible array
+	 * rotation.
+	 * 
+	 * @param arr
+	 * @return sum
+	 */
+	public int findMaxSumByRotatingArray(int[] arr) {
+
+		// Find array sum and i*arr[i] with no rotation
+		// Stores sum of arr[i]
+		int arrSum = 0;
+
+		// Stores sum of i*arr[i]
+		int currVal = 0;
+
+		for (int i = 0; i < arr.length; i++) {
+			arrSum = arrSum + arr[i];
+			currVal = currVal + (i * arr[i]);
+		}
+
+		// Initialize result as 0 rotation sum
+		int maxVal = currVal;
+
+		// Try all rotations one by one and find
+		// the maximum rotation sum.
+		for (int j = 1; j < arr.length; j++) {
+			currVal = currVal + arrSum - arr.length * arr[arr.length - j];
+			if (currVal > maxVal)
+				maxVal = currVal;
+		}
+
+		// Return result
+		return maxVal;
+
 	}
 }
