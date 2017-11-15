@@ -4,7 +4,7 @@ package org.janardhan.array;
  * 
  * @author janardhan 2017
  */
-public class ArrayMain {
+public class ArrayRotation {
 
 	/**
 	 * This methods left rotates the array by shiftBy positions.
@@ -209,7 +209,7 @@ public class ArrayMain {
 			currVal = currVal + (i * arr[i]);
 		}
 
-		// Initialize result as 0 rotation sum
+		// Initiali ze result as 0 rotation sum
 		int maxVal = currVal;
 
 		// Try all rotations one by one and find
