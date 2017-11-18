@@ -1,6 +1,11 @@
 package org.janardhan.array;
 
-public class ArrayRearrangement {
+/**
+ * 
+ * @author janardhan 2017
+ *
+ */
+public class Rearrangement {
 
 	/**
 	 * This method changes the input array is [-1, 2, -3, 4, 5, 6, -7, 8, 9], to
@@ -51,6 +56,12 @@ public class ArrayRearrangement {
 	 * This method rearranges Input: arr[] = {3, 6, 5, 10, 7, 20}
 	 * 
 	 * Output: arr[] = {6, 3, 10, 5, 20, 7}
+	 * 
+	 * i.e. arr[0] >= arr[1] <= arr[2] >= arr[3] <= arr[4]
+	 * 
+	 * The algorithm is to visited even indexes i.e. 0,2 and check if the the
+	 * current index is smaller than previous and greater than next , swap them
+	 * 
 	 * 
 	 */
 	public static void sortArrayInWaveForm(int[] arr) {

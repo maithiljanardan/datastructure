@@ -4,7 +4,7 @@ package org.janardhan.array;
  * 
  * @author janardhan 2017
  */
-public class ArrayRotation {
+public class Rotation {
 
 	/**
 	 * This methods left rotates the array by shiftBy positions.
@@ -30,7 +30,7 @@ public class ArrayRotation {
 		/*
 		 
 		 */
-		for (int i = 0; i < gCd(arraySize, shiftBy); i++) {
+		for (int i = 0; i < Misc.gCd(arraySize, shiftBy); i++) {
 
 			temp = arr[i];
 			j = i;
@@ -71,44 +71,10 @@ public class ArrayRotation {
 	 */
 	public static void leftRotateArrayByReversal(int[] arr, int shiftBy) {
 
-		reverserArray(arr, 0, shiftBy - 1);
-		reverserArray(arr, shiftBy, arr.length - 1);
-		reverserArray(arr, 0, arr.length - 1);
+		Misc.reverserArray(arr, 0, shiftBy - 1);
+		Misc.reverserArray(arr, shiftBy, arr.length - 1);
+		Misc.reverserArray(arr, 0, arr.length - 1);
 
-	}
-
-	/**
-	 * This method reverses an array
-	 * 
-	 * @param arr
-	 * @param start
-	 * @param end
-	 */
-	private static void reverserArray(int[] arr, int start, int end) {
-		int temp;
-		while (start < end) {
-			temp = arr[start];
-			arr[start] = arr[end];
-			arr[end] = temp;
-			start++;
-			end--;
-		}
-
-	}
-
-	/**
-	 * This method calculates the gcd for two given input numbers
-	 * 
-	 * @param x
-	 * @param y
-	 * @return
-	 * @author janardhan 2017
-	 */
-	private static int gCd(int x, int y) {
-		if (y == 0) {
-			return x;
-		}
-		return gCd(y, x % y);
 	}
 
 	/**

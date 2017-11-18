@@ -7,12 +7,12 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
-public class ArrayRotationTest {
+public class RotationTest {
 
 	@Test
 	public void testIfPairExistsInRotatedSortedArray() {
 
-		ArrayRotation arrayRotation = new ArrayRotation();
+		Rotation arrayRotation = new Rotation();
 		int[] arr = { 11, 15, 6, 8, 10 };
 		assertEquals(true, arrayRotation.ifPairExistsInSortedRotatedArray(arr, 16));
 	}

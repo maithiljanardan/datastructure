@@ -4,7 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-public class ArrayRearrangementTest {
+public class RearrangementTest {
 
 	@Test
 	public void test_rearrangeNegativePositionValInArray() {
@@ -12,6 +12,6 @@ public class ArrayRearrangementTest {
 		int[] arr = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
 		int[] expected = { 4, -3, 5, -1, 6, -7, 2, 8, 9 };
 
-		assertArrayEquals(expected, ArrayRearrangement.rearrangeNegativePositionValInArray(arr));
+		assertArrayEquals(expected, Rearrangement.rearrangeNegativePositionValInArray(arr));
 	}
 }
