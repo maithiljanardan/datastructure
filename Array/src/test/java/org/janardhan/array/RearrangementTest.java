@@ -14,4 +14,9 @@ public class RearrangementTest {
 
 		assertArrayEquals(expected, Rearrangement.rearrangeNegativePositionValInArray(arr));
 	}
+
+	@Test
+	public void testSortOnAbsDiff() {
+		Rearrangement.sortOnAbsDiff(new int[] { 10, 5, 3, 9, 2 }, 7);
+	}
 }

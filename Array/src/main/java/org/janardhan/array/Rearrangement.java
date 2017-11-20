@@ -1,5 +1,9 @@
 package org.janardhan.array;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * 
  * @author janardhan 2017
@@ -79,4 +83,56 @@ public class Rearrangement {
 		}
 
 	}
+
+	/**
+	 * Given an array of n distinct elements and a number x,this method prints array
+	 * elements according to the absolute difference with x, i. e., element having
+	 * minimum difference comes first and so on.
+	 * 
+	 * If two or more elements are at equal distance arrange them in same sequence
+	 * as in the given array.
+	 * 
+	 * 
+	 * @param arr
+	 * @param val
+	 */
+	public static void sortOnAbsDiff(int[] arr, int val) {
+
+		int arrSize = arr.length;
+
+		TreeMap<Integer, ArrayList<Integer>> multiMap = new TreeMap<Integer, ArrayList<Integer>>();
+
+		for (int i = 0; i < arrSize; i++) {
+
+			ArrayList<Integer> arrayList;
+
+			// If the absolute difference is not present in the map, create a new list and
+			// add the element. Else get the list and append the element
+			if (multiMap.get(Math.abs(val - arr[i])) == null) {
+
+				arrayList = new ArrayList<Integer>();
+				arrayList.add(arr[i]);
+
+			} else {
+				arrayList = multiMap.get(Math.abs(val - arr[i]));
+				arrayList.add(arr[i]);
+
+			}
+
+			multiMap.put(Math.abs(val - arr[i]), arrayList);
+		}
+
+		for (Map.Entry<Integer, ArrayList<Integer>> entry : multiMap.entrySet()) {
+			
+			if (entry.getValue().size() > 1) {
+				for (Integer i : entry.getValue()) {
+					System.out.print(i);
+				}
+			}
+			else {
+				System.out.print(entry.getValue().get(0));
+			}
+		}
+	}
+
 }
