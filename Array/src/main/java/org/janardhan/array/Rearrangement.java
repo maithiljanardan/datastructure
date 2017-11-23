@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * 
+ *
  * @author janardhan 2017
  *
  */
@@ -13,9 +13,9 @@ public class Rearrangement {
 
 	/**
 	 * This method changes the input array is [-1, 2, -3, 4, 5, 6, -7, 8, 9], to
-	 * 
+	 *
 	 * [9,-7, 8, -3, 5, -1, 2, 4, 6]
-	 * 
+	 *
 	 * @param arr
 	 * @return
 	 */
@@ -58,15 +58,15 @@ public class Rearrangement {
 
 	/**
 	 * This method rearranges Input: arr[] = {3, 6, 5, 10, 7, 20}
-	 * 
+	 *
 	 * Output: arr[] = {6, 3, 10, 5, 20, 7}
-	 * 
+	 *
 	 * i.e. arr[0] >= arr[1] <= arr[2] >= arr[3] <= arr[4]
-	 * 
+	 *
 	 * The algorithm is to visited even indexes i.e. 0,2 and check if the the
 	 * current index is smaller than previous and greater than next , swap them
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public static void sortArrayInWaveForm(int[] arr) {
 
@@ -88,11 +88,11 @@ public class Rearrangement {
 	 * Given an array of n distinct elements and a number x,this method prints array
 	 * elements according to the absolute difference with x, i. e., element having
 	 * minimum difference comes first and so on.
-	 * 
+	 *
 	 * If two or more elements are at equal distance arrange them in same sequence
 	 * as in the given array.
-	 * 
-	 * 
+	 *
+	 *
 	 * @param arr
 	 * @param val
 	 */
@@ -123,16 +123,107 @@ public class Rearrangement {
 		}
 
 		for (Map.Entry<Integer, ArrayList<Integer>> entry : multiMap.entrySet()) {
-			
+
 			if (entry.getValue().size() > 1) {
 				for (Integer i : entry.getValue()) {
 					System.out.print(i);
 				}
-			}
-			else {
+			} else {
 				System.out.print(entry.getValue().get(0));
 			}
 		}
+	}
+
+	/**
+	 * Input: arr[] = {1, 14, 5, 20, 4, 2, 54, 20, 87, 98, 3, 1, 32}
+	 *
+	 * lowVal = 14, highVal = 20
+	 *
+	 * Output: arr[] = {1, 5, 4, 2, 1, 3, 14, 20, 20, 98, 87, 32, 54}
+	 *
+	 * @param arr
+	 * @param low
+	 * @param high
+	 * @return
+	 */
+	public static int[] threeWayPartition(int[] arr, int low, int high) {
+
+		int arrSize = arr.length;
+
+		// Initialize ext available positions for
+		// smaller (than range) and greater lements
+		int start = 0, end = arrSize - 1;
+
+		// Traverse elements from left
+		for (int i = 0; i < end;) {
+
+			// If current element is smaller than
+			// range, put it on next available smaller
+			// position.
+
+			if (arr[i] < low) {
+
+				int temp = arr[start];
+				arr[start] = arr[i];
+				arr[i] = temp;
+				start++;
+				i++;
+
+			}
+
+			// If current element is greater than
+			// range, put it on next available greater
+			// position.
+			else if (arr[i] > high) {
+
+				int temp = arr[end];
+				arr[end] = arr[i];
+				arr[i] = temp;
+				end--;
+
+			}
+
+			else
+				i++;
+		}
+
+		return arr;
+	}
+
+	/**
+	 * This method rearranges an array such that the max and min numbers come
+	 * adjacent
+	 *
+	 * Input : arr[] = { 7, 6, 5, 4, 3, 2, 1 }
+	 *
+	 * Output : arr[] = {7, 1, 6, 2, 5, 3, 4}
+	 *
+	 */
+	public static int[] rearrrangeInMaxMinForm(int[] arr) {
+
+		int arrSize = arr.length;
+
+		// Auxiliary array to hold modified array
+		int[] temp = new int[arrSize];
+
+		// Indexes of smallest and largest elements
+		// from remaining array.
+		int l = 0, h = arrSize - 1;
+
+		// To indicate whether we need to copy remaining
+		// largest or remaining smallest at next position
+		boolean flag = true;
+
+		// Store result in temp[]
+		for (int i = 0; i < arrSize; i++) {
+			if (flag)
+				temp[i] = arr[h--];
+			else
+				temp[i] = arr[l++];
+
+			flag = !flag;
+		}
+		return arr;
 	}
 
 }

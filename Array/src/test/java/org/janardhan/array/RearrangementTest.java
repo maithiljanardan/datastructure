@@ -17,6 +17,15 @@ public class RearrangementTest {
 
 	@Test
 	public void testSortOnAbsDiff() {
-		Rearrangement.sortOnAbsDiff(new int[] { 10, 5, 3, 9, 2 }, 7);
+		// Rearrangement.sortOnAbsDiff(new int[] { 10, 5, 3, 9, 2 }, 7);
+	}
+
+	@Test
+	public void testRearrrangeInMaxMinForm() {
+
+		// assertArrayEquals(new int[] { 7, 1, 6, 2, 5, 3, 4 },
+		// Rearrangement.rearrrangeInMaxMinForm(new int[] { 7, 6, 5, 4, 3, 2, 1 }));
+		assertArrayEquals(new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5, },
+				Rearrangement.rearrrangeInMaxMinForm(new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 }));
 	}
 }
