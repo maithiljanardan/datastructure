@@ -226,4 +226,150 @@ public class Rearrangement {
 		return arr;
 	}
 
+	/**
+	 * This function finds a sorted subsequence of size 3
+	 * 
+	 * @param arr
+	 */
+	public static void find3Numbers(int[] arr) {
+
+		int arrSize = arr.length;
+
+		int max = arrSize - 1; // Index of maximum element from right side
+
+		int min = 0; // Index of minimum element from left side
+
+		int i;
+
+		/*
+		 * Create an array that will store index of a smaller element on left side. If
+		 * there is no smaller element on left side, then smaller[i] will be -1.
+		 */
+		int[] smaller = new int[arrSize];
+
+		smaller[0] = -1; // first entry will always be -1
+
+		for (i = 1; i < arrSize; i++) {
+			if (arr[i] <= arr[min]) {
+				min = i;
+				smaller[i] = -1;
+			} else
+				smaller[i] = min;
+		}
+
+		/*
+		 * Create another array that will store index of a greater element on right
+		 * side. If there is no greater element on right side, then greater[i] will be
+		 * -1.
+		 */
+		int[] greater = new int[arrSize];
+
+		greater[arrSize - 1] = -1; // last entry will always be -1
+
+		for (i = arrSize - 2; i >= 0; i--) {
+			if (arr[i] >= arr[max]) {
+				max = i;
+				greater[i] = -1;
+			} else
+				greater[i] = max;
+		}
+
+		// Now find a number which has both a greater number
+		// on right side and smaller number on left side
+		for (i = 0; i < arrSize; i++) {
+			if (smaller[i] != -1 && greater[i] != -1) {
+				System.out.print(arr[smaller[i]] + " " + arr[i] + " " + arr[greater[i]]);
+				return;
+			}
+		}
+
+		// If we reach number, then there are no such 3 numbers
+		System.out.println("No such triplet found");
+		return;
+	}
+
+	/**
+	 * Returns the product of max product subarray. Assumes that the given array
+	 * always has a subarray with product more than 1
+	 */
+	public static int maxSubarrayProduct(int arr[]) {
+
+		int arrSize = arr.length;
+
+		// max positive product ending at the current position
+		int max_ending_here = 1;
+
+		// min negative product ending at the current position
+		int min_ending_here = 1;
+
+		// Initialize overall max product
+		int max_so_far = 1;
+
+		/*
+		 * Traverse through the array. Following values are maintained after the ith
+		 * iteration: max_ending_here is always 1 or some positive product ending with
+		 * arr[i] min_ending_here is always 1 or some negative product ending with
+		 * arr[i]
+		 */
+		for (int i = 0; i < arrSize; i++) {
+			/*
+			 * If this element is positive, update max_ending_here. Update min_ending_here
+			 * only if min_ending_here is negative
+			 */
+			if (arr[i] > 0) {
+				max_ending_here = max_ending_here * arr[i];
+				min_ending_here = Math.min(min_ending_here * arr[i], 1);
+			}
+
+			/*
+			 * If this element is 0, then the maximum product cannot end here, make both
+			 * max_ending_here and min_ending _here 0 Assumption: Output is alway greater
+			 * than or equal to 1.
+			 */
+			else if (arr[i] == 0) {
+				max_ending_here = 1;
+				min_ending_here = 1;
+			}
+
+			/*
+			 * If element is negative. This is tricky max_ending_here can either be 1 or
+			 * positive. min_ending_here can either be 1 or negative. next min_ending_here
+			 * will always be prev. max_ending_here * arr[i] next max_ending_here will be 1
+			 * if prev min_ending_here is 1, otherwise next max_ending_here will be prev
+			 * min_ending_here * arr[i]
+			 */
+			else {
+				int temp = max_ending_here;
+				max_ending_here = Math.max(min_ending_here * arr[i], 1);
+				min_ending_here = temp * arr[i];
+			}
+
+			// update max_so_far, if needed
+			if (max_so_far < max_ending_here)
+				max_so_far = max_ending_here;
+		}
+
+		return max_so_far;
+	}
+
+	/**
+	 * Largest Sum Contiguous Subarray
+	 * 
+	 * @param a
+	 * @return
+	 */
+	public static int maxSubArraySum(int a[]) {
+
+		int size = a.length;
+		int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+
+		for (int i = 0; i < size; i++) {
+			max_ending_here = max_ending_here + a[i];
+			if (max_so_far < max_ending_here)
+				max_so_far = max_ending_here;
+			if (max_ending_here < 0)
+				max_ending_here = 0;
+		}
+		return max_so_far;
+	}
 }

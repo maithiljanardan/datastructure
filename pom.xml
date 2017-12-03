@@ -27,5 +27,6 @@
 	<modules>
 		<module>Array</module>
     <module>Node</module>
+    <module>LinkedList</module>
   </modules>
 </project>
