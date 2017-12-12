@@ -15,6 +15,11 @@ public class Node<T> {
 		this.next = next;
 	}
 
+	@Override
+	public String toString() {
+		return "Node [data=" + data + ", next=" + next + "]";
+	}
+
 	public Node<T> getNext() {
 		return next;
 	}
